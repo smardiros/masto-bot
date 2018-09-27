@@ -25,30 +25,34 @@ prev_para_line = 0
 count = 0
 current_chapter = ""
 
-for i, line in enumerate(lines):
-
+for i, line in enumerate(lines[:20]):
+	print(line)
 	# GROUPING
 
 	if re.match(r'^CHAPTER \d+\.', line):
 		current_chapter = line[:-1]
 	else:
 		if line != "\n":
-			paragraph += re.sub(format_chars, '', line[:-1]) + " "
-
+			paragraph += re.sub(format_chars, 's', line[:-1]) + " "
 		else:
+			print("aha!")
 			if len(paragraph) + len(prev_paragraph) < 400:
 
 				prev_paragraph += "\n" + paragraph
 				paragraph = ""
 				para_line = i
 
-			else if len(paragraph) < 400:
+			elif len(paragraph) < 400:
 
 				prev_paragraph, prev_para_line = paragraph, para_line
 				paragraph = ""
 				para_line = i
 
-			else if len(prev_paragraph) < 10
+			elif len(paragraph) > 10:
+				print(paragraph)
+
+				# prev_paragraph = paragraph
+				# paragraph = ""
 
 
 
